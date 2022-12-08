@@ -16,7 +16,9 @@ driver = webdriver.Chrome(service=service)
 #driver.quit() will close your browser
 def get_misssing_data(year):
     web = f'https://en.wikipedia.org/wiki/{year}_FIFA_World_Cup'
-
+    #here i figure out the data from the website using inspect element usin
+    #inbuilt developer tool in browser. the class in the website is wierdly 
+    #defined so I used xpath. //tagName[@AttributeName] 
     driver.get(web)
     matches = driver.find_elements(by='xpath', value='//td[@align="right"]/.. | //td[@style="text-align:right;"]/..')#inspect data from website using dev tool
     # matches = driver.find_elements(by='xpath', value='//tr[@style="font-size:90%"]')
@@ -24,7 +26,7 @@ def get_misssing_data(year):
     home = []
     score = []
     away = []
-
+     #//tr/td[no. of column]
     for match in matches:
         home.append(match.find_element(by='xpath', value='./td[1]').text)
         score.append(match.find_element(by='xpath', value='./td[2]').text)
